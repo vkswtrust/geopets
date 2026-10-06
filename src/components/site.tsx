@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/logo.jpg.asset.json";
+import logo from "@/assets/logo.jpg";
 import { Button } from "@/components/ui/button";
 import { useAuth, signOut } from "@/lib/auth";
 import { programs } from "@/lib/content";
@@ -16,7 +16,7 @@ const main = [
 ] as const;
 
 export function Logo({ className = "h-12" }: { className?: string }) {
-  return <img src={logo.url} alt="GeoPetCare — One World. One Family. Every Pet Counts." className={`${className} w-auto object-contain`} />;
+  return <img src={logo} alt="GeoPetCare — One World. One Family. Every Pet Counts." className={`${className} w-auto object-contain`} />;
 }
 
 export function SiteHeader() {

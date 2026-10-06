@@ -46,7 +46,7 @@ function ProgramPage() {
         {p.form === "foster" && <section><h2 className="mb-4 text-2xl font-semibold text-primary">Apply to foster</h2>
           <SubmissionForm type="Foster" requireLogin extras={[{ name: "city", label: "City" }, { name: "home", label: "Home type (flat, house, etc.)" }]} submitLabel="Submit application" /></section>}
         {p.form === "csr" && <section><h2 className="mb-4 text-2xl font-semibold text-primary">CSR enquiry</h2>
-          <SubmissionForm type="CSR" extras={[{ name: "company", label: "Company / Organisation Name" }, { name: "interest", label: "CSR Interest" }]} submitLabel="Send enquiry" /></section>}
+          <SubmissionForm requireLogin type="CSR" extras={[{ name: "company", label: "Company / Organisation Name" }, { name: "interest", label: "CSR Interest" }]} submitLabel="Send enquiry" /></section>}
       </div>
     </>
   );

@@ -18,7 +18,7 @@ function Contact() {
         {s["contact_email"] && <>Email: <a className="text-primary underline" href={`mailto:${s["contact_email"]}`}>{s["contact_email"]}</a></>}
       </PageHero>
       <div className="mx-auto max-w-3xl px-4 py-14">
-        <SubmissionForm type="General" typeChoices={submissionTypes} submitLabel="Send enquiry" />
+        <SubmissionForm requireLogin type="General" typeChoices={submissionTypes} submitLabel="Send enquiry" />
       </div>
     </>
   );
