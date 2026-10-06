@@ -10,33 +10,186 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AdoptRouteImport } from './routes/adopt'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DonateRouteImport } from './routes/donate'
+import { Route as GeopetIdRouteImport } from './routes/geopet-id'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as SponsorRouteImport } from './routes/sponsor'
+import { Route as TransparencyRouteImport } from './routes/transparency'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedSubmissionsRouteImport } from './routes/_authenticated/submissions'
+import { Route as ProgramsSlugRouteImport } from './routes/programs.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdoptRoute = AdoptRouteImport.update({
+  id: '/adopt',
+  path: '/adopt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DonateRoute = DonateRouteImport.update({
+  id: '/donate',
+  path: '/donate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GeopetIdRoute = GeopetIdRouteImport.update({
+  id: '/geopet-id',
+  path: '/geopet-id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SponsorRoute = SponsorRouteImport.update({
+  id: '/sponsor',
+  path: '/sponsor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TransparencyRoute = TransparencyRouteImport.update({
+  id: '/transparency',
+  path: '/transparency',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSubmissionsRoute =
+  AuthenticatedSubmissionsRouteImport.update({
+    id: '/submissions',
+    path: '/submissions',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const ProgramsSlugRoute = ProgramsSlugRouteImport.update({
+  id: '/programs/$slug',
+  path: '/programs/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/adopt': typeof AdoptRoute
+  '/contact': typeof ContactRoute
+  '/donate': typeof DonateRoute
+  '/geopet-id': typeof GeopetIdRoute
+  '/login': typeof LoginRoute
+  '/sponsor': typeof SponsorRoute
+  '/transparency': typeof TransparencyRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/submissions': typeof AuthenticatedSubmissionsRoute
+  '/programs/$slug': typeof ProgramsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/adopt': typeof AdoptRoute
+  '/contact': typeof ContactRoute
+  '/donate': typeof DonateRoute
+  '/geopet-id': typeof GeopetIdRoute
+  '/login': typeof LoginRoute
+  '/sponsor': typeof SponsorRoute
+  '/transparency': typeof TransparencyRoute
+  '/admin': typeof AuthenticatedAdminRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/submissions': typeof AuthenticatedSubmissionsRoute
+  '/programs/$slug': typeof ProgramsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/adopt': typeof AdoptRoute
+  '/contact': typeof ContactRoute
+  '/donate': typeof DonateRoute
+  '/geopet-id': typeof GeopetIdRoute
+  '/login': typeof LoginRoute
+  '/sponsor': typeof SponsorRoute
+  '/transparency': typeof TransparencyRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/submissions': typeof AuthenticatedSubmissionsRoute
+  '/programs/$slug': typeof ProgramsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/adopt'
+    | '/contact'
+    | '/donate'
+    | '/geopet-id'
+    | '/login'
+    | '/sponsor'
+    | '/transparency'
+    | '/admin'
+    | '/profile'
+    | '/submissions'
+    | '/programs/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/adopt'
+    | '/contact'
+    | '/donate'
+    | '/geopet-id'
+    | '/login'
+    | '/sponsor'
+    | '/transparency'
+    | '/admin'
+    | '/profile'
+    | '/submissions'
+    | '/programs/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/adopt'
+    | '/contact'
+    | '/donate'
+    | '/geopet-id'
+    | '/login'
+    | '/sponsor'
+    | '/transparency'
+    | '/_authenticated/admin'
+    | '/_authenticated/profile'
+    | '/_authenticated/submissions'
+    | '/programs/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AdoptRoute: typeof AdoptRoute
+  ContactRoute: typeof ContactRoute
+  DonateRoute: typeof DonateRoute
+  GeopetIdRoute: typeof GeopetIdRoute
+  LoginRoute: typeof LoginRoute
+  SponsorRoute: typeof SponsorRoute
+  TransparencyRoute: typeof TransparencyRoute
+  ProgramsSlugRoute: typeof ProgramsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +201,119 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/adopt': {
+      id: '/adopt'
+      path: '/adopt'
+      fullPath: '/adopt'
+      preLoaderRoute: typeof AdoptRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/donate': {
+      id: '/donate'
+      path: '/donate'
+      fullPath: '/donate'
+      preLoaderRoute: typeof DonateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/geopet-id': {
+      id: '/geopet-id'
+      path: '/geopet-id'
+      fullPath: '/geopet-id'
+      preLoaderRoute: typeof GeopetIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sponsor': {
+      id: '/sponsor'
+      path: '/sponsor'
+      fullPath: '/sponsor'
+      preLoaderRoute: typeof SponsorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/transparency': {
+      id: '/transparency'
+      path: '/transparency'
+      fullPath: '/transparency'
+      preLoaderRoute: typeof TransparencyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/submissions': {
+      id: '/_authenticated/submissions'
+      path: '/submissions'
+      fullPath: '/submissions'
+      preLoaderRoute: typeof AuthenticatedSubmissionsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/programs/$slug': {
+      id: '/programs/$slug'
+      path: '/programs/$slug'
+      fullPath: '/programs/$slug'
+      preLoaderRoute: typeof ProgramsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedSubmissionsRoute: typeof AuthenticatedSubmissionsRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedSubmissionsRoute: AuthenticatedSubmissionsRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AdoptRoute: AdoptRoute,
+  ContactRoute: ContactRoute,
+  DonateRoute: DonateRoute,
+  GeopetIdRoute: GeopetIdRoute,
+  LoginRoute: LoginRoute,
+  SponsorRoute: SponsorRoute,
+  TransparencyRoute: TransparencyRoute,
+  ProgramsSlugRoute: ProgramsSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
