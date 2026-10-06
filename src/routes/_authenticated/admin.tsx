@@ -132,7 +132,7 @@ function Animals() {
       {data.length === 0 && <p className="text-muted-foreground">No animals yet.</p>}
       {data.map((a) => (
         <div key={a.id} className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border bg-card p-4">
-          <div className="flex items-center gap-3">{a.photos[0] && <img src={a.photos[0]} alt="" className="size-12 rounded-lg object-cover" />}<p className="font-semibold">{a.name} <span className="text-sm font-normal text-muted-foreground">{String(a.geopet_id ?? "")}</span></p>
+          <div className="flex items-center gap-3">{a.photos[0] && <img src={a.photos[0]} alt="" className="size-12 rounded-lg object-cover" />}<p className="font-semibold">{a.name} <span className="text-sm font-normal text-muted-foreground">{String(a["geopet_id"] ?? "")}</span></p>
             <Badge>{a.adoption_status}</Badge><Badge variant={a.published ? "default" : "secondary"}>{a.published ? "Published" : "Hidden"}</Badge></div>
           <div className="flex gap-2"><Button size="sm" variant="outline" onClick={() => setEdit(a)}>Edit</Button><Button size="sm" variant="destructive" onClick={() => del(a.id)}>Delete</Button></div>
         </div>
@@ -151,8 +151,8 @@ function AnimalForm({ animal, onDone }: { animal: AnimalRow | null; onDone: () =
     const v = (k: string) => (String(f.get(k) ?? "").trim() || null);
     const row: Record<string, unknown> = { photos, published: f.get("published") === "on", adoption_status: v("adoption_status") ?? "Available" };
     [...animalFields, ...animalLong].forEach((k) => (row[k] = v(k)));
-    if (!row.name) { toast.error("Name required"); setBusy(false); return; }
-    const res = animal ? await supabase.from("animals").update(row).eq("id", animal.id).select("id").single()
+    if (!row["name"]) { toast.error("Name required"); setBusy(false); return; }
+    const res = animal ? await supabase.from("animals").update(row as never).eq("id", animal.id).select("id").single()
       : await supabase.from("animals").insert(row as never).select("id").single();
     if (res.error) { toast.error(res.error.message); setBusy(false); return; }
     const g: Record<string, unknown> = { animal_id: res.data.id, updated_at: new Date().toISOString() };
@@ -191,7 +191,7 @@ function Donations() {
     const v = (k: string) => String(f.get(k) ?? "").trim() || null;
     const amount = Number(f.get("amount"));
     if (!v("donor_name") || !(amount > 0)) { toast.error("Donor name and amount required"); return; }
-    const { error } = await supabase.from("donations").insert({ donor_name: v("donor_name")!, email: v("email"), amount, method: v("method"), reference: v("reference"), notes: v("notes"), donated_on: v("donated_on") ?? undefined });
+    const { error } = await supabase.from("donations").insert({ donor_name: v("donor_name")!, email: v("email"), amount, method: v("method"), reference: v("reference"), notes: v("notes"), ...(v("donated_on") ? { donated_on: v("donated_on")! } : {}) });
     if (error) toast.error(error.message); else { form.reset(); qc.invalidateQueries({ queryKey: ["admin-donations"] }); }
   }
   async function del(id: string) { if (confirm("Delete record?")) { await supabase.from("donations").delete().eq("id", id); qc.invalidateQueries({ queryKey: ["admin-donations"] }); } }
@@ -227,8 +227,8 @@ function Settings() {
     <div className="mt-6 space-y-6">
       <section className="rounded-2xl border bg-card p-6">
         <h3 className="mb-3 text-lg font-semibold text-primary">Payment QR image</h3>
-        {s.donate_qr && <img src={s.donate_qr} alt="QR" className="mb-3 size-40 rounded-lg border object-contain" />}
-        <div className="flex gap-2"><input type="file" accept="image/*" onChange={(e) => qr(e.target.files?.[0])} className="text-sm" />{s.donate_qr && <Button size="sm" variant="ghost" onClick={() => save("donate_qr", "")}>Remove</Button>}</div>
+        {s["donate_qr"] && <img src={s["donate_qr"]} alt="QR" className="mb-3 size-40 rounded-lg border object-contain" />}
+        <div className="flex gap-2"><input type="file" accept="image/*" onChange={(e) => qr(e.target.files?.[0])} className="text-sm" />{s["donate_qr"] && <Button size="sm" variant="ghost" onClick={() => save("donate_qr", "")}>Remove</Button>}</div>
       </section>
       {group("Donation details", donationKeys)}
       {group("Impact statistics (leave blank to show “Data will be updated soon.”)", statKeys)}

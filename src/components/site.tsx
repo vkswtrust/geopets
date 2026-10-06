@@ -25,7 +25,7 @@ export function SiteHeader() {
   const links = (
     <>
       {main.map((l) => (
-        <Link key={l.label} to={l.to} params={"params" in l ? l.params : undefined} onClick={() => setOpen(false)}
+        <Link key={l.label} to={l.to} {...("params" in l ? { params: l.params } : {})} onClick={() => setOpen(false)}
           className="text-sm font-semibold text-foreground/80 hover:text-primary" activeProps={{ className: "text-primary" }}>
           {l.label}
         </Link>

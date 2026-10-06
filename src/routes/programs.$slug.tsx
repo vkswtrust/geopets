@@ -24,7 +24,7 @@ function ProgramPage() {
   const p = Route.useLoaderData();
   const { data: s = {} } = useQuery(settingsQuery);
   const isContent = p.settingKey?.startsWith("content_");
-  const emergency = p.settingKey === "emergency_number" ? s.emergency_number : undefined;
+  const emergency = p.settingKey === "emergency_number" ? s["emergency_number"] : undefined;
   return (
     <>
       <PageHero kicker={p.kicker} title={p.title}>{!isContent && p.summary}</PageHero>

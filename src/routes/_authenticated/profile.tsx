@@ -20,7 +20,7 @@ function Profile() {
     queryFn: async () => (await supabase.from("admin_access_requests").select("*").eq("user_id", session!.user.id).order("created_at", { ascending: false }).limit(1)).data?.[0] ?? null,
   });
   async function requestAdmin() {
-    const { error } = await supabase.from("admin_access_requests").insert({ user_id: session!.user.id, name: profile?.name, email: profile?.email });
+    const { error } = await supabase.from("admin_access_requests").insert({ user_id: session!.user.id, name: profile?.name ?? null, email: profile?.email ?? null });
     if (error) toast.error("Could not send request."); else { toast.success("Admin access requested."); qc.invalidateQueries({ queryKey: ["my-admin-request"] }); }
   }
   return (
