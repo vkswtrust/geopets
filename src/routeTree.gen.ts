@@ -18,6 +18,7 @@ import { Route as GeopetIdRouteImport } from './routes/geopet-id'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as SponsorRouteImport } from './routes/sponsor'
 import { Route as TransparencyRouteImport } from './routes/transparency'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedSubmissionsRouteImport } from './routes/_authenticated/submissions'
 import { Route as ProgramsSlugRouteImport } from './routes/programs.$slug'
@@ -66,6 +67,11 @@ const TransparencyRoute = TransparencyRouteImport.update({
   path: '/transparency',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -92,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/sponsor': typeof SponsorRoute
   '/transparency': typeof TransparencyRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/submissions': typeof AuthenticatedSubmissionsRoute
   '/programs/$slug': typeof ProgramsSlugRoute
@@ -105,6 +112,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/sponsor': typeof SponsorRoute
   '/transparency': typeof TransparencyRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/submissions': typeof AuthenticatedSubmissionsRoute
   '/programs/$slug': typeof ProgramsSlugRoute
@@ -120,6 +128,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/sponsor': typeof SponsorRoute
   '/transparency': typeof TransparencyRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/submissions': typeof AuthenticatedSubmissionsRoute
   '/programs/$slug': typeof ProgramsSlugRoute
@@ -135,6 +144,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/sponsor'
     | '/transparency'
+    | '/admin'
     | '/profile'
     | '/submissions'
     | '/programs/$slug'
@@ -148,6 +158,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/sponsor'
     | '/transparency'
+    | '/admin'
     | '/profile'
     | '/submissions'
     | '/programs/$slug'
@@ -162,6 +173,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/sponsor'
     | '/transparency'
+    | '/_authenticated/admin'
     | '/_authenticated/profile'
     | '/_authenticated/submissions'
     | '/programs/$slug'
@@ -245,6 +257,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TransparencyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/profile': {
       id: '/_authenticated/profile'
       path: '/profile'
@@ -270,11 +289,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedSubmissionsRoute: typeof AuthenticatedSubmissionsRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedSubmissionsRoute: AuthenticatedSubmissionsRoute,
 }
