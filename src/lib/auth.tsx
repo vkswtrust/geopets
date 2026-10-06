@@ -45,6 +45,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 export const useAuth = () => useContext(Ctx);
 
 export async function signInWithGoogle() {
-  return lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/login" });
+  return lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
 }
 export const signOut = () => supabase.auth.signOut();
