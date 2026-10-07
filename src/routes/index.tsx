@@ -3,7 +3,7 @@ import { HeartHandshake, PawPrint, Siren, Home as HomeIcon, Users, HandCoins, Ma
 import hero from "@/assets/hero.jpg";
 import { Button } from "@/components/ui/button";
 import { meta } from "@/components/site";
-import { useAuth, signInWithGoogle } from "@/lib/auth";
+import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/")({
   head: () => meta("Every Life Matters. Every Paw Deserves Love.", "GeoPetCare Foundation rescues, treats, feeds and rehomes animals. One World. One Family. Every Pet Counts."),
@@ -43,7 +43,7 @@ function Home() {
               ) : (
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <p className="text-sm text-muted-foreground">Sign in to adopt, volunteer, foster and track your submissions.</p>
-                  <Button variant="pill" onClick={() => signInWithGoogle()}>Continue with Google</Button>
+                  <Button asChild variant="pill"><Link to="/login">Sign in</Link></Button>
                 </div>
               )}
             </div>

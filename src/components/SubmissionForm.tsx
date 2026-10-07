@@ -21,7 +21,7 @@ export function SubmissionForm({
     return (
       <div className="rounded-2xl border bg-card p-6 text-center">
         <p className="text-muted-foreground">Please sign in to submit this form. Your GPC User ID will be attached automatically.</p>
-        <Button asChild variant="pill" className="mt-4"><Link to="/login">Sign in with Google</Link></Button>
+        <Button asChild variant="pill" className="mt-4"><Link to="/login">Sign in</Link></Button>
       </div>
     );
   }
