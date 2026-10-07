@@ -16,6 +16,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DonateRouteImport } from './routes/donate'
 import { Route as GeopetIdRouteImport } from './routes/geopet-id'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SponsorRouteImport } from './routes/sponsor'
 import { Route as TransparencyRouteImport } from './routes/transparency'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
@@ -57,6 +58,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SponsorRoute = SponsorRouteImport.update({
   id: '/sponsor',
   path: '/sponsor',
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/donate': typeof DonateRoute
   '/geopet-id': typeof GeopetIdRoute
   '/login': typeof LoginRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sponsor': typeof SponsorRoute
   '/transparency': typeof TransparencyRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/donate': typeof DonateRoute
   '/geopet-id': typeof GeopetIdRoute
   '/login': typeof LoginRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sponsor': typeof SponsorRoute
   '/transparency': typeof TransparencyRoute
   '/admin': typeof AuthenticatedAdminRoute
@@ -126,6 +134,7 @@ export interface FileRoutesById {
   '/donate': typeof DonateRoute
   '/geopet-id': typeof GeopetIdRoute
   '/login': typeof LoginRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/sponsor': typeof SponsorRoute
   '/transparency': typeof TransparencyRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
@@ -142,6 +151,7 @@ export interface FileRouteTypes {
     | '/donate'
     | '/geopet-id'
     | '/login'
+    | '/reset-password'
     | '/sponsor'
     | '/transparency'
     | '/admin'
@@ -156,6 +166,7 @@ export interface FileRouteTypes {
     | '/donate'
     | '/geopet-id'
     | '/login'
+    | '/reset-password'
     | '/sponsor'
     | '/transparency'
     | '/admin'
@@ -171,6 +182,7 @@ export interface FileRouteTypes {
     | '/donate'
     | '/geopet-id'
     | '/login'
+    | '/reset-password'
     | '/sponsor'
     | '/transparency'
     | '/_authenticated/admin'
@@ -187,6 +199,7 @@ export interface RootRouteChildren {
   DonateRoute: typeof DonateRoute
   GeopetIdRoute: typeof GeopetIdRoute
   LoginRoute: typeof LoginRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SponsorRoute: typeof SponsorRoute
   TransparencyRoute: typeof TransparencyRoute
   ProgramsSlugRoute: typeof ProgramsSlugRoute
@@ -241,6 +254,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sponsor': {
@@ -311,6 +331,7 @@ const rootRouteChildren: RootRouteChildren = {
   DonateRoute: DonateRoute,
   GeopetIdRoute: GeopetIdRoute,
   LoginRoute: LoginRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SponsorRoute: SponsorRoute,
   TransparencyRoute: TransparencyRoute,
   ProgramsSlugRoute: ProgramsSlugRoute,
